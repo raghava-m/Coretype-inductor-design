@@ -5,6 +5,23 @@ converters. The goal is to match and beat Frenetic AI on capability while
 being fully open source and reproducible. See `INDUCTOR_TOOL_PLAN.md` for
 the strategy and `INDUCTOR_DESIGN_PLAN.md` for the methodology.
 
+## Run in GitHub Codespaces (no local install)
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/raghava-m/Coretype-inductor-design?quickstart=1&ref=cursor/inductor-design-tool-plan-d762)
+
+1. Click the badge above (or on GitHub: **Code → Codespaces → Create codespace on this branch**).
+2. Wait ~60 s for the devcontainer to build. The postCreate script installs
+   the package and runs the tests automatically.
+3. In the Codespaces terminal, try:
+
+   ```bash
+   inductor-design buck --vin-min 9 --vin-max 16 --vout 3.3 --iout 5 --fsw 500e3
+   inductor-design boost --vin-min 10 --vin-max 14 --vout 24 --iout 2 --fsw 300e3
+   ```
+
+4. Stop the codespace from the GitHub UI when you're done so it doesn't
+   consume free-tier hours.
+
 v0 supports **buck** and **boost** converters end-to-end:
 
 - Converter spec → minimum L, I_rms, I_peak, ripple, duty range.
