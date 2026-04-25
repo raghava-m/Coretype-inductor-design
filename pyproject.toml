@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inductor-design"
+version = "0.1.0"
+description = "Open, physics-grounded inductor design tool for power converters (buck, boost, ...)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "Cursor Cloud Agent"}]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+inductor-design = "inductor_design.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["inductor_design*"]
+exclude = ["tests*", "examples*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
