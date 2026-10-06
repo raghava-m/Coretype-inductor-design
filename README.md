@@ -64,6 +64,23 @@ print(render_markdown(result))
 - `examples/buck_12v_to_3v3.py` — 12 V → 3.3 V / 5 A @ 500 kHz
 - `examples/boost_12v_to_24v.py` — 12 V → 24 V / 2 A @ 300 kHz
 
+## Three-phase web app (cloud)
+
+The desktop Frenetic GUI is Tkinter and needs a local display. This repo now
+ships a browser UI that takes the same three-phase inputs and plots the
+loss / mass / volume trade-off:
+
+```bash
+python -m webapp.server --host 0.0.0.0 --port 8000
+```
+
+Open `http://127.0.0.1:8000/`. **Evaluate design** runs the analytical
+sizing on the current spec. **Show trade-offs** sweeps stack, layers, Bmax,
+core material, conductor, and strand parallels, then ranks the Pareto front.
+
+The physics lives in `three_phase/` (vendored from the Transformer-design-app
+analytical engine). FEMM is not required for this page.
+
 ## Tests
 
 ```bash

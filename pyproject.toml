@@ -17,10 +17,14 @@ dev = ["pytest>=7.0"]
 
 [project.scripts]
 inductor-design = "inductor_design.cli:main"
+three-phase-web = "webapp.server:main"
 
 [tool.setuptools.packages.find]
-include = ["inductor_design*"]
+include = ["inductor_design*", "three_phase*", "webapp*"]
 exclude = ["tests*", "examples*"]
+
+[tool.setuptools.package-data]
+webapp = ["static/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
