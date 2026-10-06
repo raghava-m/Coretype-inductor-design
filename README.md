@@ -70,6 +70,21 @@ print(render_markdown(result))
 pytest
 ```
 
+Independent textbook cross-checks of CCM sizing, gapped/powder magnetics,
+Steinmetz, Dowell, DCR, and the 2-node thermal iteration live in
+`tests/test_physics_crosscheck.py`. Findings and measured speed are in
+`VALIDATION.md`.
+
+## Speed
+
+```bash
+python scripts/bench_analytical.py
+```
+
+A full buck or boost design (540 candidates, Pareto filter) finishes in
+about **8 ms** on a typical cloud CPU. Converter CCM equations take ~1.5 µs;
+one size+loss+thermal candidate evaluation takes ~10 µs.
+
 ## Status and roadmap
 
 See `INDUCTOR_TOOL_PLAN.md` for the full plan. v0 is the MVP; v1 adds
