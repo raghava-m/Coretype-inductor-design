@@ -42,7 +42,10 @@ class Wire:
 
     @property
     def outer_area_m2(self) -> float:
-        return math.pi * (self.outer_diameter_m / 2.0) ** 2 * self.strands
+        # outer_diameter_m is already the finished conductor envelope:
+        # copper+enamel for solid, served-bundle diameter for litz. Do not
+        # multiply by strand count — that overstated litz window fill by N.
+        return math.pi * (self.outer_diameter_m / 2.0) ** 2
 
     def dcr_ohm(self, mlt_m: float, turns: int, temp_c: float = 70.0) -> float:
         rho_t = COPPER_RHO_20C * (1.0 + COPPER_ALPHA * (temp_c - 20.0))
