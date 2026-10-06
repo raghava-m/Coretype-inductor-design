@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Three-phase inductor — design trade-offs</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">3φ</div>
+      <div>
+        <div class="brand-name">Inductor studio</div>
+        <div class="brand-sub">Three-phase analytical trade-offs</div>
+      </div>
+    </div>
+    <p class="sidebar-note">
+      Same inputs as the desktop Frenetic GUI. The engine sizes turns, losses,
+      mass and window fill, then sweeps materials and geometry for a Pareto front.
+    </p>
+    <form id="spec-form"></form>
+    <details class="advanced">
+      <summary>Advanced winding gaps</summary>
+      <div id="advanced-fields"></div>
+    </details>
+    <div class="actions">
+      <button type="button" id="btn-design" class="btn btn-ghost">Evaluate design</button>
+      <button type="button" id="btn-tradeoff" class="btn btn-primary">Show trade-offs</button>
+    </div>
+    <p class="status" id="status">Ready.</p>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>Design trade-off</h1>
+      <p>Loss · mass · envelope volume — lower is better on every axis.</p>
+    </header>
+
+    <section class="kpis" id="kpis">
+      <article class="kpi"><span class="kpi-label">Turns</span><strong id="k-turns">—</strong></article>
+      <article class="kpi"><span class="kpi-label">Total loss</span><strong id="k-loss">—</strong></article>
+      <article class="kpi"><span class="kpi-label">Mass</span><strong id="k-mass">—</strong></article>
+      <article class="kpi"><span class="kpi-label">Envelope</span><strong id="k-vol">—</strong></article>
+      <article class="kpi"><span class="kpi-label">B peak</span><strong id="k-b">—</strong></article>
+      <article class="kpi"><span class="kpi-label">Window fill</span><strong id="k-win">—</strong></article>
+    </section>
+
+    <section class="charts">
+      <article class="card">
+        <h2>Loss vs mass</h2>
+        <canvas id="chart-mass" width="640" height="360"></canvas>
+        <p class="legend"><span class="dot baseline"></span> Baseline
+          <span class="dot cand"></span> Feasible
+          <span class="dot pareto"></span> Pareto
+        </p>
+      </article>
+      <article class="card">
+        <h2>Loss vs envelope volume</h2>
+        <canvas id="chart-vol" width="640" height="360"></canvas>
+      </article>
+    </section>
+
+    <section class="card table-card">
+      <div class="table-head">
+        <h2>Pareto designs</h2>
+        <span id="search-meta" class="muted"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Core</th>
+              <th>Conductor</th>
+              <th>Layers</th>
+              <th>Stack</th>
+              <th>Turns</th>
+              <th>Loss</th>
+              <th>Mass</th>
+              <th>Volume</th>
+              <th>Bpk</th>
+              <th>J</th>
+              <th>WH%</th>
+            </tr>
+          </thead>
+          <tbody id="pareto-body">
+            <tr><td colspan="12" class="empty">Evaluate a spec, then run trade-offs.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card detail-card" id="detail-card" hidden>
+      <h2>Selected design</h2>
+      <pre id="detail"></pre>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
