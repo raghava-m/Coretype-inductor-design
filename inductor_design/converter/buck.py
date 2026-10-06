@@ -52,6 +52,12 @@ def size_buck(spec: BuckSpec) -> BuckOperatingPoint:
     Ripple is maximum at Vin_max (lowest duty).  L_min is sized to hold
     ripple ≤ spec.ripple_ratio · Iout at that corner.
     """
+    # Lossy-duty convention D = Vout/(Vin*η).  At η=1 this is the textbook
+    # CCM result and the on-time / off-time volt-seconds are identical, so
+    # L_min from Vout*(1-D) matches (Vin-Vout)*D.  At η<1 they diverge
+    # (~10% at η=0.92): D is inflated, 1-D shrinks, and this off-interval
+    # formula slightly undersizes L versus the on-interval.  Ripple is set
+    # by terminal voltages, so treat η<1 L as a known first-pass limitation.
     d_min = spec.vout / (spec.vin_max * spec.efficiency)
     d_max = spec.vout / (spec.vin_min * spec.efficiency)
 
